@@ -31,7 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable}`}>
-      <body className="antialiased bg-bg-primary text-text-primary selection:bg-accent selection:text-bg-primary overflow-x-hidden cursor-none">
+      <body className="antialiased bg-bg-base text-text-primary selection:bg-accent-primary selection:text-bg-base overflow-x-hidden cursor-none">
+        <div className="noise-overlay" />
         <CustomCursor />
         <SmoothScroll>
           {children}

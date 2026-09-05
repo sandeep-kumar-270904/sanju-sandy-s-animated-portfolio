@@ -1,43 +1,127 @@
 @import "tailwindcss";
 
-@theme {
-  --color-bg-primary: #030303;
-  --color-bg-secondary: #0D0D0D;
-  --color-text-primary: #FAFAFA;
-  --color-text-secondary: #888888;
-  --color-accent: #FF3A00;
-  
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: var(--font-space-grotesk), sans-serif;
+:root {
+  /* Color System */
+  --bg-base: #030303;
+  --bg-secondary: #0A0A0A;
+  --surface: #111111;
+  --surface-elevated: #1A1A1A;
+  --surface-hover: #222222;
+
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-muted: #52525B;
+
+  --accent-primary: #FF3A00;
+  --accent-secondary: #FF6B3D;
+
+  --border: #27272A;
+  --border-hover: #3F3F46;
+
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Typography System */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
+
+  /* Fluid Typography (Clamp) */
+  --text-display-xl: clamp(4rem, 8vw, 10rem);
+  --text-display-l: clamp(3rem, 6vw, 8rem);
+  --text-display-m: clamp(2.5rem, 5vw, 6rem);
+  
+  --text-h1: clamp(2rem, 4vw, 4rem);
+  --text-h2: clamp(1.75rem, 3vw, 3rem);
+  --text-h3: clamp(1.5rem, 2vw, 2.25rem);
+  
+  --text-body-l: clamp(1.125rem, 1.5vw, 1.25rem);
+  --text-body-m: 1rem;
+  --text-body-s: 0.875rem;
+
+  /* Spacing System */
+  --space-4: 0.25rem;
+  --space-8: 0.5rem;
+  --space-12: 0.75rem;
+  --space-16: 1rem;
+  --space-24: 1.5rem;
+  --space-32: 2rem;
+  --space-48: 3rem;
+  --space-64: 4rem;
+  --space-80: 5rem;
+  --space-96: 6rem;
+  --space-120: 7.5rem;
+  --space-160: 10rem;
+
+  /* Radius System */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-pill: 9999px;
+
+  /* Motion Tokens */
+  --ease-primary: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-micro: 200ms;
+  --duration-interaction: 350ms;
+  --duration-reveal: 750ms;
+  --duration-major: 1000ms;
+  --duration-cinematic: 1400ms;
+}
+
+@theme {
+  --color-bg-base: var(--bg-base);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-hover: var(--surface-hover);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-secondary: var(--accent-secondary);
+  
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
 }
 
 body {
-  background-color: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-html.lenis, html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
+/* Base text selection */
+::selection {
+  background-color: var(--accent-primary);
+  color: var(--bg-base);
 }
 
-::selection {
-  background-color: var(--color-accent);
-  color: var(--color-bg-primary);
+/* Subtle grain texture */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
+
+/* Lenis overrides */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 
