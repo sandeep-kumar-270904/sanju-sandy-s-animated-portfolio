@@ -58,7 +58,7 @@ export default function ProjectCard({ index, title, category, description, techn
       data-hoverable
     >
       {/* Background Image Placeholder */}
-      <div className="absolute inset-0 bg-[#0a0a0a] border border-[#222] overflow-hidden">
+      <div className="absolute inset-0 bg-[#0a0a0a] border border-border overflow-hidden">
         <motion.div 
           className="w-full h-full bg-[#111] bg-[url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-30 mix-blend-luminosity"
           animate={{ scale: isHovered ? 1.05 : 1 }}
@@ -70,7 +70,7 @@ export default function ProjectCard({ index, title, category, description, techn
       <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col justify-between z-10 pointer-events-none">
         <div className="flex justify-between items-start">
           <motion.div 
-            className="font-mono text-xs text-accent uppercase tracking-widest"
+            className="font-mono text-xs text-accent-primary uppercase tracking-widest"
             animate={{ y: isHovered ? -4 : 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
@@ -78,7 +78,7 @@ export default function ProjectCard({ index, title, category, description, techn
           </motion.div>
           <div className="flex gap-2">
             {technologies.slice(0, 3).map((tech) => (
-              <span key={tech} className="px-3 py-1 bg-bg-primary/50 backdrop-blur-md rounded-full border border-[#333] text-[10px] font-mono text-[#aaa]">
+              <span key={tech} className="px-3 py-1 bg-bg-base/50 backdrop-blur-md rounded-full border border-border text-[10px] font-mono text-text-secondary">
                 {tech}
               </span>
             ))}
@@ -94,7 +94,7 @@ export default function ProjectCard({ index, title, category, description, techn
             {title}
           </motion.h3>
           <motion.p 
-            className="text-[#888] text-sm md:text-base font-sans max-w-lg"
+            className="text-text-secondary text-sm md:text-base font-sans max-w-lg"
             animate={{ opacity: isHovered ? 1 : 0.7 }}
           >
             {description}
