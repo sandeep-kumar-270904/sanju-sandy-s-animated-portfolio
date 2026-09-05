@@ -72,7 +72,7 @@ export default function Home() {
           <div>
             <h3 className="text-body-l mb-6 text-text-secondary">Cards</h3>
             <Card className="p-8" hoverable>
-              <Label className="mb-4">01 — Interactive</Label>
+              <Label className="mb-4">01 - Interactive</Label>
               <h4 className="text-h2 font-display mb-4">Project Card Base</h4>
               <p className="text-text-secondary text-body-m">
                 This foundation utilizes the elevated surface token and our centralized interaction timing.
@@ -84,4 +84,3 @@ export default function Home() {
     </main>
   );
 }
-
