@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 
 export default function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const [cursorState, setCursorState] = useState<"default" | "hover" | "interactive">("default");
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Hide cursor on touch devices
+    // Disable on touch devices
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     setIsVisible(true);
@@ -20,16 +20,20 @@ export default function CustomCursor() {
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (
+      
+      // Check for specific interaction types
+      if (target.closest("[data-interaction=''primary'']")) {
+        setCursorState("interactive");
+      } else if (
         target.tagName.toLowerCase() === "a" ||
         target.tagName.toLowerCase() === "button" ||
         target.closest("a") ||
         target.closest("button") ||
         target.closest("[data-hoverable]")
       ) {
-        setIsHovering(true);
+        setCursorState("hover");
       } else {
-        setIsHovering(false);
+        setCursorState("default");
       }
     };
 
@@ -44,14 +48,33 @@ export default function CustomCursor() {
 
   if (!isVisible) return null;
 
+  const variants = {
+    default: {
+      scale: 1,
+      backgroundColor: "var(--color-accent-primary)",
+      mixBlendMode: "difference" as const,
+    },
+    hover: {
+      scale: 1.5,
+      backgroundColor: "var(--color-text-primary)",
+      mixBlendMode: "difference" as const,
+    },
+    interactive: {
+      scale: 2,
+      backgroundColor: "transparent",
+      border: "1px solid var(--color-accent-primary)",
+      mixBlendMode: "normal" as const,
+    }
+  };
+
   return (
     <motion.div
-      className="fixed top-0 left-0 w-4 h-4 bg-accent-primary rounded-full pointer-events-none z-[9999] mix-blend-difference"
-      animate={{
+      className="fixed top-0 left-0 w-4 h-4 rounded-full pointer-events-none z-[9999]"
+      variants={variants}
+      animate={cursorState}
+      style={{
         x: mousePosition.x - 8,
         y: mousePosition.y - 8,
-        scale: isHovering ? 2.5 : 1,
-        opacity: isHovering ? 0.8 : 1,
       }}
       transition={{
         type: "spring",
@@ -62,4 +85,3 @@ export default function CustomCursor() {
     />
   );
 }
-
