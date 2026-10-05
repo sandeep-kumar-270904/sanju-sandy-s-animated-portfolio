@@ -22,7 +22,7 @@ export default function CustomCursor() {
       const target = e.target as HTMLElement;
       
       // Check for specific interaction types
-      if (target.closest("[data-interaction=''primary'']")) {
+      if (target.closest("[data-interaction='primary']")) {
         setCursorState("interactive");
       } else if (
         target.tagName.toLowerCase() === "a" ||
